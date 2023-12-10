@@ -5,10 +5,10 @@ from pprint import pprint
 
 load_dotenv()
 
-def get_current_weather():
-    print('\n*** Get Weather Conditions **\n')
+def get_current_weather(city="lagos"):
+    #print('\n*** Get Weather Conditions **\n')
 
-    city = input("\nPlease enter a city name: \n")
+    #city = input("\nPlease enter a city name: \n")
 
 
 
@@ -18,11 +18,24 @@ def get_current_weather():
 
     weather_data = requests.get(request_url).json()
 
+    return weather_data
+
     #pprint(weather_data)
 
-    print(f'\nCurrent weather for {weather_data["name"]}')
-    print(f'\nThe temp is {weather_data["main"]["temp"]}')
-    print(f'\nFeels like {weather_data["main"]["feels_like"]} and {weather_data["weather"][0]["description"]}.')
+    # print(f'\nCurrent weather for {weather_data["name"]}')
+    # print(f'\nThe temp is {weather_data["main"]["temp"]}')
+    # print(f'\nFeels like {weather_data["main"]["feels_like"]} and {weather_data["weather"][0]["description"]}.')
 
 if __name__ == "__main__":
-    get_current_weather()
+    print("\n*** Get current weather conditions ***\n")
+
+    city = input("Please enter a city name:\n")
+
+    # check if the user input is empty
+    if not bool(city.strip()):
+        city = "lagos"
+
+    weather_data = get_current_weather(city)
+
+    print("\n")
+    pprint(weather_data)
